@@ -1,14 +1,15 @@
 import { useAlert } from "@/components/alert-dialog";
 import { validateEmail, validatePassword } from "@/utils/validations";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
-    KeyboardAvoidingView,
-    Platform,
-    ScrollView,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 export default function LoginScreen() {
@@ -17,6 +18,7 @@ export default function LoginScreen() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [touched, setTouched] = useState({ email: false, password: false });
+  const router = useRouter();
 
   const isValidEmail = validateEmail(email);
   const { valid: passwordValid } = validatePassword(password);
@@ -28,7 +30,7 @@ export default function LoginScreen() {
     if (!passwordValid) {
         return alert("Senha inválida", "A senha não atende aos requisitos mínimos.");
     }
-    alert("Sucesso", "Login realizado com sucesso!");
+    router.push("/(tabs)/panel");
   }
 
   return (
