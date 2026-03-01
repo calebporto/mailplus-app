@@ -1,4 +1,5 @@
 import { useAlert } from "@/components/alert-dialog";
+import { PrimaryButton } from "@/components/ui/primary-button";
 import { validateEmail, validatePassword } from "@/utils/validations";
 import { useRouter } from "expo-router";
 import { useState } from "react";
@@ -128,15 +129,7 @@ export default function LoginScreen() {
           </TouchableOpacity>
 
           {/* Botão de enviar */}
-          <TouchableOpacity
-            className={`w-full rounded-2xl py-4 items-center bg-red-600`}
-            onPress={handleSubmit}
-            activeOpacity={0.85}
-          >
-            <Text className="text-white text-base font-bold tracking-wide">
-              Entrar
-            </Text>
-          </TouchableOpacity>
+          <PrimaryButton label="Entrar" onPress={handleSubmit} />
 
           {/* Rodapé */}
           <View className="flex-row justify-center mt-8">

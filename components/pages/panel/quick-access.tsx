@@ -1,3 +1,4 @@
+import { useRouter } from "expo-router";
 import { Text, TouchableOpacity, View } from "react-native";
 import { MenuItem } from "./types";
 
@@ -7,6 +8,15 @@ interface QuickAccessProps {
 }
 
 export function QuickAccess({ items, onItemPress }: QuickAccessProps) {
+  const router = useRouter();
+
+  function handlePress(item: MenuItem) {
+    if (item.route) {
+      router.push(item.route as any);
+    }
+    onItemPress?.(item);
+  }
+
   return (
     <>
       <Text className="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-3 mt-2">
@@ -18,7 +28,7 @@ export function QuickAccess({ items, onItemPress }: QuickAccessProps) {
           <TouchableOpacity
             key={item.label}
             activeOpacity={0.8}
-            onPress={() => onItemPress?.(item)}
+            onPress={() => handlePress(item)}
             className="bg-white rounded-2xl p-4 items-center justify-center"
             style={{ width: "47%" }}
           >

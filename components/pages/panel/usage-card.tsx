@@ -11,7 +11,7 @@ export function UsageCard({ planLimit, emailsUsed }: UsageCardProps) {
 
   return (
     <>
-      <Text className="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-3">
+      <Text className="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-3 mt-3">
         Uso do plano
       </Text>
 

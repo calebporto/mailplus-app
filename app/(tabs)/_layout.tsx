@@ -50,6 +50,20 @@ export default function TabLayout() {
           tabBarButton: () => null,
         }}
       />
+      <Tabs.Screen
+        name="templates"
+        options={{
+          tabBarStyle: { display: 'none' },
+          tabBarButton: () => null,
+        }}
+      />
+      <Tabs.Screen
+        name="destinatarios"
+        options={{
+          tabBarStyle: { display: 'none' },
+          tabBarButton: () => null,
+        }}
+      />
     </Tabs>
   );
 }

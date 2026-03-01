@@ -1,11 +1,12 @@
+import { useRouter } from "expo-router";
 import {
-    Animated,
-    Dimensions,
-    Pressable,
-    ScrollView,
-    Text,
-    TouchableOpacity,
-    View,
+  Animated,
+  Dimensions,
+  Pressable,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import { MenuItem } from "./types";
 
@@ -32,6 +33,15 @@ export function SideDrawer({
   onLogout,
   onItemPress,
 }: SideDrawerProps) {
+  const router = useRouter();
+
+  function handleItemPress(item: MenuItem) {
+    onClose();
+    if (item.route) {
+      setTimeout(() => router.push(item.route as any), 250);
+    }
+    onItemPress?.(item);
+  }
   return (
     <>
       {/* Overlay */}
@@ -69,11 +79,24 @@ export function SideDrawer({
 
         {/* Itens */}
         <ScrollView className="flex-1 pt-3">
+          {/* Início */}
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => {
+              onClose();
+              setTimeout(() => router.push("/(tabs)/panel"), 250);
+            }}
+            className="flex-row items-center px-6 py-4 border-b border-gray-50"
+          >
+            <Text className="text-xl mr-4">🏠</Text>
+            <Text className="text-gray-700 text-base font-medium">Início</Text>
+          </TouchableOpacity>
+
           {items.map((item, index) => (
             <TouchableOpacity
               key={item.label}
               activeOpacity={0.7}
-              onPress={() => onItemPress?.(item)}
+              onPress={() => handleItemPress(item)}
               className={`flex-row items-center px-6 py-4 ${
                 index !== items.length - 1 ? "border-b border-gray-50" : ""
               }`}
@@ -84,17 +107,17 @@ export function SideDrawer({
               </Text>
             </TouchableOpacity>
           ))}
-        </ScrollView>
 
-        {/* Sair */}
-        <TouchableOpacity
-          activeOpacity={0.7}
-          className="flex-row items-center px-6 py-5 border-t border-gray-100"
-          onPress={onLogout}
-        >
-          <Text className="text-xl mr-4">🚪</Text>
-          <Text className="text-red-500 text-base font-semibold">Sair</Text>
-        </TouchableOpacity>
+          {/* Sair */}
+          <TouchableOpacity
+            activeOpacity={0.7}
+            className="flex-row items-center px-6 py-5 border-t border-gray-100 mt-2"
+            onPress={onLogout}
+          >
+            <Text className="text-xl mr-4">🚪</Text>
+            <Text className="text-red-500 text-base font-semibold">Sair</Text>
+          </TouchableOpacity>
+        </ScrollView>
       </Animated.View>
     </>
   );
